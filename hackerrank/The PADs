@@ -1,0 +1,15 @@
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+/* Query 1: Names with parenthetical first letter of profession */
+SELECT Name || '(' || SUBSTR(Occupation, 1, 1) || ')'
+FROM OCCUPATIONS
+ORDER BY Name;
+
+/* Query 2: Summary of occupation counts */
+SELECT 'There are a total of ' || COUNT(Occupation) || ' ' || LOWER(Occupation) || 's.'
+FROM OCCUPATIONS
+GROUP BY Occupation
+ORDER BY COUNT(Occupation) ASC, Occupation ASC;
+
