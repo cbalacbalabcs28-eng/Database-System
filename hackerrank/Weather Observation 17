@@ -1,0 +1,15 @@
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+SELECT h.hacker_id, h.name, SUM(m.max_score) AS total_score
+FROM Hackers h
+JOIN (
+    /* Get the maximum score for each challenge per hacker */
+    SELECT hacker_id, challenge_id, MAX(score) AS max_score
+    FROM Submissions
+    GROUP BY hacker_id, challenge_id
+) m ON h.hacker_id = m.hacker_id
+GROUP BY h.hacker_id, h.name
+/* Use the aggregate function directly instead of the alias 'total_score' */
+HAVING SUM(m.max_score) > 0
